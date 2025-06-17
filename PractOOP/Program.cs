@@ -36,7 +36,9 @@ public class Program
                     FilterByGenre(movieManager);
                     break;
                 case "4":
-                    Console.WriteLine("Дякуємо за використання програми!");
+                    SearchMovie(movieManager);
+                    break;
+                case "5":
                     return;
                 default:
                     Console.WriteLine("Некоректний вибір. Спробуйте ще раз.");
@@ -64,7 +66,8 @@ public class Program
         Console.WriteLine("1. Додати фільм");
         Console.WriteLine("2. Видалити фільм");
         Console.WriteLine("3. Фільтрувати за жанром");
-        Console.WriteLine("4. Вийти");
+        Console.WriteLine("4. Пошук фільму за назвою");
+        Console.WriteLine("5. Вийти");
         Console.Write("Ваш вибір: ");
     }
 
@@ -121,6 +124,25 @@ public class Program
         Console.WriteLine($"\nФільми жанру \"{GenreExtensions.DisplayGenre(genre)}\":");
         Console.WriteLine("---------------------------");
         manager.FilterByGenre(genre);
+    }
+
+    private static void SearchMovie(MovieManager manager)
+    {
+        Console.Clear();
+        Console.WriteLine("ПОШУК ФІЛЬМУ ЗА НАЗВОЮ\n");
+
+        Console.Write("Введіть назву фільму для пошуку: ");
+        string title = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(title))
+        {
+            Console.WriteLine("Помилка! Назва фільму не може бути порожньою.");
+            return;
+        }
+
+        Console.WriteLine("\nРезультат пошуку:");
+        Console.WriteLine("-----------------");
+        manager.FindMovieByTitle(title);
     }
 
     private static Genres SelectGenre(string prompt)

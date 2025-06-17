@@ -81,9 +81,32 @@ namespace PractOOP
                     node.Prev.Next = node.Next;
                 }
                 else Head = node.Next;
-                node = null;
             }
 
+        }
+        public int countMovies()
+        {
+            var count = 0;
+            var node = Head;
+            while (node != null)
+            {
+                count++;
+                node = node.Next;
+            }
+            return count;
+        }
+        public void FindMovieByTitle(string title)
+        {
+            var node = Head;
+            while (node.Movie.Title.ToLower() != title.ToLower() && node != null)
+            {
+                node = node.Next;
+            }
+            if (node == null)
+            {
+                Console.WriteLine($"Фільму {title} немає в списку");
+            }
+            node.Movie.DisplayMovie();
         }
         public void FilterByGenre(Genres genre)
         {
